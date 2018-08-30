@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assignment_2
 {
+    /// <summary>
+    /// The VirtualDie class represents a Die of 'x' sides. The die can then be 'rolled' to determine which side will be face up.
+    /// </summary>
     public class VirtualDie
     {
         private int sides = 6;
