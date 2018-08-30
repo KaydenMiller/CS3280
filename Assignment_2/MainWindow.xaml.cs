@@ -70,6 +70,9 @@ namespace Assignment_2
         
 
         // ------ THE FOLLOWING SECTION NEED IMPROVEMENT BY A LOT ----------
+        // This system was used sense using System.Threading.Thread.Sleep(x) would cause the Main UI thread to stop thus preventing the Image from updating
+        // Primary Problem with this system is it must wait for the WPF UI to update on its own time causing some lag
+        // This system is also just one big code smell
 
         private System.Timers.Timer timer = new System.Timers.Timer(400);
         private int rolledCount = 0, rollsToDo = 0, endOn = 0;
