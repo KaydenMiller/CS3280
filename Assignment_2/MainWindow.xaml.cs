@@ -33,7 +33,6 @@ namespace Assignment_2
         private BindingList<UserData> userData = new BindingList<UserData>();
 
         private BitmapImage[] diceImages = new BitmapImage[6];
-        private Task rollDiceImage;
 
         private int timesPlayed = 0;
         private int timesCorrect = 0;
@@ -141,6 +140,9 @@ namespace Assignment_2
 
             if (int.TryParse(txtGuess.Text, out sideGuessed))
             {
+                // Set the ErrorBox visibility to collapsed
+                ErrorBox.Visibility = Visibility.Collapsed;
+
                 // The value given by the user was valid
                 ++timesPlayed;
                 sideRolled = D6.Roll();
@@ -162,7 +164,9 @@ namespace Assignment_2
             else
             {
                 // The parse did not succeed alert the user
-                MessageBox.Show("Please enter a valid number (1-6) into the textbox!", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //MessageBox.Show("Please enter a valid number (1-6) into the textbox!", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorBox.Visibility = Visibility.Visible;
+                ErrorOutput.Content = "Please enter a valid number(1 - 6) into the textbox!";
             }
         }
 
