@@ -66,16 +66,16 @@ namespace Assignment_2
 
             DataContext = this;
         }
-        
+
 
         // ------ THE FOLLOWING SECTION NEED IMPROVEMENT BY A LOT ----------
         // This system was used sense using System.Threading.Thread.Sleep(x) would cause the Main UI thread to stop thus preventing the Image from updating
         // Primary Problem with this system is it must wait for the WPF UI to update on its own time causing some lag
         // This system is also just one big code smell
-
+#region REFACTOR_THIS
         private System.Timers.Timer timer = new System.Timers.Timer(400);
         private int rolledCount = 0, rollsToDo = 0, endOn = 0;
-        Dispatcher dispatcherUI;
+        private Dispatcher dispatcherUI;
 
         /// <summary>
         /// This method will set how many rolls the dice on the screen should make.
@@ -127,6 +127,7 @@ namespace Assignment_2
                 }));
             }
         }
+#endregion REFACTOR_THIS
 
         /// <summary>
         /// Will simulate rolling dice and Update the UI with information about the current session.
@@ -140,6 +141,12 @@ namespace Assignment_2
 
             if (int.TryParse(txtGuess.Text, out sideGuessed))
             {
+                if (sideGuessed > 6 || sideGuessed < 1)
+                {
+                    DisplayErrorMessage("Please enter a valid number(1 - 6) into the textbox!");
+                    return;
+                }
+
                 // Set the ErrorBox visibility to collapsed
                 ErrorBox.Visibility = Visibility.Collapsed;
 
@@ -164,10 +171,15 @@ namespace Assignment_2
             else
             {
                 // The parse did not succeed alert the user
-                //MessageBox.Show("Please enter a valid number (1-6) into the textbox!", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
-                ErrorBox.Visibility = Visibility.Visible;
-                ErrorOutput.Content = "Please enter a valid number(1 - 6) into the textbox!";
+                DisplayErrorMessage("Please enter a valid number(1 - 6) into the textbox!");
+                return;
             }
+        }
+
+        private void DisplayErrorMessage(string Message)
+        {
+            ErrorBox.Visibility = Visibility.Visible;
+            ErrorOutput.Content = Message;
         }
 
         /// <summary>

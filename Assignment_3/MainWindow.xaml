@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="750" Width="525">
+    <Window.Resources>
+        <Style x:Key="Section_Header" TargetType="GroupBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="168*"/>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="98*"/>
+            <RowDefinition Height="301*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="168" VerticalAlignment="Top" Width="517">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="322*"/>
+                <ColumnDefinition Width="195*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Content="Counts" Style="{StaticResource Section_Header}">
+                
+            </GroupBox>
+        </Grid>
+        <DataGrid HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="4" Width="497"/>
+
     </Grid>
 </Window>
