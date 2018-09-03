@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="750" Width="525">
     <Window.Resources>
-        <Style x:Key="Section_Header" TargetType="GroupBox">
+        <Style x:Key="GroupBoxHeader" TargetType="TextBlock">
+
             <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="ButtonText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </Window.Resources>
@@ -21,17 +26,68 @@
             <RowDefinition Height="98*"/>
             <RowDefinition Height="301*"/>
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Left" Height="168" VerticalAlignment="Top" Width="517">
+        <Grid HorizontalAlignment="Left" 
+              Height="168" VerticalAlignment="Top" Width="517">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="322*"/>
                 <ColumnDefinition Width="195*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Content="Counts" Style="{StaticResource Section_Header}">
+            <GroupBox x:Name="grpCounts" 
+                      Margin="10">
+                <GroupBox.Header>
+                    <TextBlock Style="{StaticResource GroupBoxHeader}">
+                        Counts
+                    </TextBlock>
+                </GroupBox.Header>
                 
-            </GroupBox>
-        </Grid>
-        <DataGrid HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="4" Width="497"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Number of Students: " 
+                               Grid.Column="0" Grid.Row="0"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" 
+                             VerticalAlignment="Center"/>
 
+                    <TextBlock Text="Number of Assignments: " 
+                               Grid.Column="0" Grid.Row="1"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="1"
+                             VerticalAlignment="Center"/>
+
+                    <Button x:Name="btnSubmitCounts"
+                            Grid.Row="2" Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Padding="25,0">
+                        <TextBlock Style="{StaticResource ButtonText}">
+                            Submit
+                        </TextBlock>
+                    </Button>
+                </Grid>
+            </GroupBox>
+
+            <Button x:Name="btnReset"
+                    Grid.Column="1" Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Padding="10">
+                <TextBlock FontWeight="Bold"
+                           FontSize="15">
+                    Reset Scores
+                </TextBlock>
+            </Button>
+        </Grid>
+
+        <DataGrid HorizontalAlignment="Left" 
+                  Grid.Row="4" Width="497"
+                  Margin="10,10,0,10" />
     </Grid>
 </Window>
