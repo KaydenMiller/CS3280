@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="525" MinWidth="525">
+        Title="MainWindow" Height="680" Width="700" MinWidth="700">
     <Window.Resources>
         <Style x:Key="SectionHeader" TargetType="TextBlock">
 
@@ -27,11 +27,11 @@
         </Grid.RowDefinitions>
 
         <!-- Initialization -->
-        <Grid HorizontalAlignment="Left" 
-              Height="168" VerticalAlignment="Top" Width="517">
+        <Grid 
+              Height="168" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="358*"/>
-                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <GroupBox x:Name="grpCounts" 
@@ -71,7 +71,7 @@
                     <Button x:Name="btnSubmitCounts"
                             Grid.Row="2" Grid.ColumnSpan="2"
                             HorizontalAlignment="Center"
-                            Padding="25,0">
+                            Padding="25,0" Click="btnSubmitCounts_Click">
                         <TextBlock Style="{StaticResource ButtonText}">
                             Submit
                         </TextBlock>
@@ -83,7 +83,7 @@
                     Grid.Column="1" Grid.Row="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Padding="10" Height="42" Margin="26,63,23,63" Width="110">
+                    Padding="10" Height="42" Width="110" Click="btnReset_Click">
                 <TextBlock FontWeight="Bold"
                            FontSize="15">
                     Reset Scores
@@ -114,25 +114,25 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Padding="10"
-                    Content="First Student"/>
+                    Content="First Student" Click="btnFirstStudent_Click"/>
             <Button x:Name="btnPreviousStudent"
                     Grid.Column="1" Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Padding="10"
-                    Content="Previous Student"/>
+                    Content="Previous Student" Click="btnPreviousStudent_Click"/>
             <Button x:Name="btnNextStudent"
                     Grid.Column="2" Grid.Row="1"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Padding="10"
-                    Content="Next Student"/>
+                    Content="Next Student" Margin="20,0" Click="btnNextStudent_Click"/>
             <Button x:Name="btnLastStudent"
                     Grid.Column="3" Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Padding="10"
-                    Content="Last Student"/>
+                    Content="Last Student" Click="btnLastStudent_Click"/>
         </Grid>
 
         <!-- Student Information -->
@@ -166,7 +166,7 @@
                          Margin="5 0 5 0"/>
                 <Button x:Name="btnSaveName"
                         Grid.Column="2"
-                        Padding="5">
+                        Padding="5" Click="btnSaveName_Click">
                     <TextBlock Style="{StaticResource ButtonText}"
                                Text="Save Name"/>
                 </Button>
@@ -207,12 +207,11 @@
                          Margin="5 0 5 0"/>
             </Grid>
 
-            <Button Grid.Row="4"
+            <Button x:Name="btnSaveScore" Grid.Row="4"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Padding="5">
-                <TextBlock x:Name="btnSaveScore"
-                           Style="{StaticResource ButtonText}"
+                    VerticalAlignment="Top"
+                    Padding="5" Margin="210,0,209,0" Click="btnSaveScore_Click">
+                <TextBlock Style="{StaticResource ButtonText}"
                            Text="Save Score"/>
             </Button>
         </Grid>
@@ -228,16 +227,25 @@
                     Grid.Row="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Padding="5">
+                    Padding="5" Click="btnDisplayScores_Click">
                 <TextBlock Style="{StaticResource ButtonText}"
                            Text="Display Scores"/>
             </Button>
 
-            <DataGrid x:Name="dgStudentData" 
-                      Grid.Row="1"
-                      HorizontalAlignment="Center" 
-                      Width="497"
-                      Margin="10" />
+            <Border x:Name="bdrOutput"
+                    BorderBrush="Black" 
+                    BorderThickness="1" 
+                    Margin="10"
+                    Grid.Row="1">
+                <ScrollViewer Width="Auto"
+                              VerticalScrollBarVisibility="Hidden"
+                              HorizontalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="txtStudentData"
+                               Background="Beige" 
+                               FontFamily="Lucida Console"
+                               TextWrapping="NoWrap"/>
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Grid>
 </Window>
