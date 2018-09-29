@@ -20,11 +20,26 @@ namespace Assignment_3
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Total Student and total Assignments variables.
+        /// </summary>
         public int totalStudents, totalAssignments;
+        /// <summary>
+        /// The student names array.
+        /// </summary>
         public string[] studentNames;
+        /// <summary>
+        /// The student scores array.
+        /// </summary>
         public int[,] studentScores;
+        /// <summary>
+        /// Student averages array.
+        /// </summary>
         public float[] studentAverages;
 
+        /// <summary>
+        /// The current index of what student the user is interacting with.
+        /// </summary>
         private int studentIndex = 0;
 
         /// <summary>
@@ -78,7 +93,7 @@ namespace Assignment_3
             studentScores = new int[totalStudents, totalAssignments];
             studentAverages = new float[totalStudents];
 
-            lblAssignmentNumber.Text = String.Format("Enter Assignment Number (1-{0}):", totalStudents);
+            lblAssignmentNumber.Text = String.Format("Enter Assignment Number (1-{0}):", totalAssignments);
                 
             // init student scores
             for (int i = 0; i < totalStudents; i++)
