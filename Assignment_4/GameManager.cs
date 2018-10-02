@@ -14,18 +14,17 @@ namespace Assignment_4
 
         private RoundManager currentRoundManager;
 
-        public delegate void GameEvent();
-        public event GameEvent OnGameReset;
+        public delegate void GeneralGameEventHandler();
+        public event GeneralGameEventHandler OnGameOver;
 
         public GameManager()
         {
-            // Set up events
-            OnGameReset += ResetGame;
+
         }
 
         public void StartNewGame()
         {
-            currentRoundManager = new RoundManager();
+            currentRoundManager = new RoundManager(this);
         }
 
         private void ResetGame()
@@ -34,5 +33,25 @@ namespace Assignment_4
             player2Score = 0;
             ties = 0;
         }
+
+        #region EventHandlers
+        public void InvokOnGameOver(int winnerID)
+        {
+            // WinnerID (0 = player1; 1 = player2; 2 = tie)
+            switch (winnerID)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+
+            OnGameOver?.Invoke();
+        }
+        #endregion
     }
 }

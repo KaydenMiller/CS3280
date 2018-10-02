@@ -8,11 +8,26 @@ namespace Assignment_4
 {
     class RoundManager
     {
-        private int[,] gameBoard = new int[3, 3];
+        private GameManager gameManager;
+
+        private Player[,] gameBoard = new Player[3, 3];
         private int currentRound = 0;
         
-        private enum Player { Player1, Player2 }
+        private enum Player { Player1, Player2, None }
         private Player currentPlayer = Player.Player1;
+
+        public RoundManager(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    gameBoard[x, y] = Player.None;
+                }
+            }
+        }
 
         private void NextRound()
         {
@@ -28,5 +43,132 @@ namespace Assignment_4
                     break;
             }
         }
+
+        private void CheckForEndConditions()
+        {
+            Player player = CheckIfPlayerWon();
+            bool tieFlag = CheckForTie();
+
+            
+        }
+#region VictoryConditionChecking
+        private bool CheckForTie()
+        {
+            int totalFilledTiles = 0;
+
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    if (gameBoard[x, y] == Player.Player1 ||
+                        gameBoard[x, y] == Player.Player2)
+                        totalFilledTiles++;
+                }
+            }
+
+            if (totalFilledTiles == 9)
+                return true;
+            else
+                return false;
+        }
+
+        private Player CheckIfPlayerWon()
+        {
+            // Check for player to have won
+            Player[] playerWinArray = new Player[3];
+            playerWinArray[0] = CheckDiagonals();
+            playerWinArray[1] = CheckHorizontal();
+            playerWinArray[2] = CheckVertical();
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (playerWinArray[i] != Player.None)
+                {
+                    return playerWinArray[i];
+                }
+            }
+
+            return Player.None;
+        }
+
+        private Player CheckDiagonals()
+        {
+            if (gameBoard[0,0] != Player.None ||
+                gameBoard[2,0] != Player.None ||
+                gameBoard[0,2] != Player.None ||
+                gameBoard[2,2] != Player.None)
+            {
+                if (gameBoard[0,0] == Player.Player1 &&
+                    gameBoard[1,1] == Player.Player1 &&
+                    gameBoard[2,2] == Player.Player1 ||
+                    gameBoard[2,0] == Player.Player1 &&
+                    gameBoard[1,1] == Player.Player1 &&
+                    gameBoard[0,2] == Player.Player1)
+                {
+                    return Player.Player1;
+                }
+                
+                if (gameBoard[0, 0] == Player.Player2 &&
+                    gameBoard[1, 1] == Player.Player2 &&
+                    gameBoard[2, 2] == Player.Player2 ||
+                    gameBoard[2, 0] == Player.Player2 &&
+                    gameBoard[1, 1] == Player.Player2 &&
+                    gameBoard[0, 2] == Player.Player2)
+                {
+                    return Player.Player2;
+                }
+            }
+
+            return Player.None;
+        }
+
+        private Player CheckHorizontal()
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                int player1InRow = 0;
+                int player2InRow = 0;
+
+                for (int x = 0; x < 3; x++)
+                {
+                    if (gameBoard[x, y] == Player.Player1)
+                        player1InRow++;
+                    if (gameBoard[x, y] == Player.Player2)
+                        player2InRow++;
+                }
+
+                if (player1InRow == 3)
+                    return Player.Player1;
+                else if (player2InRow == 3)
+                    return Player.Player2;
+            }
+
+            return Player.None;
+        }
+
+        private Player CheckVertical()
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                int player1InCol = 0;
+                int player2InCol = 0;
+
+                for (int y = 0; y < 3; y++)
+                {
+                    if (gameBoard[x, y] == Player.Player1)
+                        player1InCol++;
+                    if (gameBoard[x, y] == Player.Player2)
+                        player2InCol++;
+                }
+
+                if (player1InCol == 3)
+                    return Player.Player1;
+                else if (player2InCol == 3)
+                    return Player.Player2;
+            }
+
+            return Player.None;
+        }
+#endregion
     }
 }
