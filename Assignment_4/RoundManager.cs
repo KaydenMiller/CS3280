@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assignment_4
 {
+    /// <summary>
+    /// The class to control the round.
+    /// </summary>
     class RoundManager
     {
         /// <summary>
