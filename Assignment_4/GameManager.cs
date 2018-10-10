@@ -16,11 +16,7 @@ namespace Assignment_4
 
         public delegate void GeneralGameEventHandler();
         public event GeneralGameEventHandler OnGameOver;
-
-        public GameManager()
-        {
-
-        }
+        public event GeneralGameEventHandler OnNextRound;
 
         public void StartNewGame()
         {
@@ -34,6 +30,13 @@ namespace Assignment_4
             ties = 0;
         }
 
+        public int SelectPosition(int x, int y)
+        {
+            int player = currentRoundManager.SelectPosition(x, y);
+            InvokeOnNextRound();
+            return player;
+        }
+
         #region EventHandlers
         public void InvokOnGameOver(int winnerID)
         {
@@ -41,16 +44,24 @@ namespace Assignment_4
             switch (winnerID)
             {
                 case 0:
+                    player1Score++;
                     break;
                 case 1:
+                    player2Score++;
                     break;
                 case 2:
+                    ties++;
                     break;
                 default:
                     throw new InvalidOperationException();
             }
 
             OnGameOver?.Invoke();
+        }
+
+        public void InvokeOnNextRound()
+        {
+            OnNextRound?.Invoke();
         }
         #endregion
     }

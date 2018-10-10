@@ -28,57 +28,57 @@
             <!-- ROW 0 -->
             <Button x:Name="btnRow0Col0" 
                     Grid.Row="0" Grid.Column="0"
-                    Background="Red">
+                    Background="Red" Click="btnRow0Col0_Click">
                     
             </Button>
 
             <Button x:Name="btnRow0Col1"
                     Grid.Row="0" Grid.Column="1"
-                    Background="Blue">
+                    Background="Blue" Click="btnRow0Col1_Click">
 
             </Button>
 
             <Button x:Name="btnRow0Col2"
                     Grid.Row="0" Grid.Column="2"
-                    Background="Green">
+                    Background="Green" Click="btnRow0Col2_Click">
 
             </Button>
 
             <!-- ROW 1 -->
             <Button x:Name="btnRow1Col0"
                     Grid.Row="1" Grid.Column="0"
-                    Background="Red">
+                    Background="Red" Click="btnRow1Col0_Click">
 
             </Button>
 
             <Button x:Name="btnRow1Col1"
                     Grid.Row="1" Grid.Column="1"
-                    Background="Blue">
+                    Background="Blue" Click="btnRow1Col1_Click">
 
             </Button>
 
             <Button x:Name="btnRow1Col2"
                     Grid.Row="1" Grid.Column="2"
-                    Background="Green">
+                    Background="Green" Click="btnRow1Col2_Click">
 
             </Button>
 
             <!-- ROW 2 -->
             <Button x:Name="btnRow2Col0"
                     Grid.Row="2" Grid.Column="0"
-                    Background="Red">
+                    Background="Red" Click="btnRow2Col0_Click">
 
             </Button>
 
             <Button x:Name="btnRow2Col1"
                     Grid.Row="2" Grid.Column="1"
-                    Background="Blue">
+                    Background="Blue" Click="btnRow2Col1_Click">
 
             </Button>
 
             <Button x:Name="btnRow2Col2"
                     Grid.Row="2" Grid.Column="2"
-                    Background="Green">
+                    Background="Green" Click="btnRow2Col2_Click">
 
             </Button>
         </Grid>
@@ -139,7 +139,8 @@
                     Grid.Row="2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Padding="5">
+                    Padding="5"
+                    Click="btnStartGame_Click">
                 <TextBlock Text="Start Game!"
                            FontSize="18"
                            FontWeight="Bold"/>

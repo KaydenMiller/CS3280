@@ -13,12 +13,15 @@ namespace Assignment_4
         private Player[,] gameBoard = new Player[3, 3];
         private int currentRound = 0;
         
-        private enum Player { Player1, Player2, None }
-        private Player currentPlayer = Player.Player1;
+        public enum Player { Player1, Player2, None }
+        public Player currentPlayer = Player.Player1;
 
         public RoundManager(GameManager gameManager)
         {
             this.gameManager = gameManager;
+
+            gameManager.OnNextRound += NextRound;
+            gameManager.OnNextRound += CheckForEndConditions;
 
             for (int y = 0; y < 3; y++)
             {
@@ -27,6 +30,12 @@ namespace Assignment_4
                     gameBoard[x, y] = Player.None;
                 }
             }
+        }
+
+        public int SelectPosition(int x, int y)
+        {
+            gameBoard[x, y] = currentPlayer;
+            return (int)currentPlayer;
         }
 
         private void NextRound()
@@ -49,7 +58,19 @@ namespace Assignment_4
             Player player = CheckIfPlayerWon();
             bool tieFlag = CheckForTie();
 
-            
+            if (tieFlag)
+            {
+                gameManager.InvokOnGameOver((int)Player.None);
+            }
+
+            if (player == Player.Player1)
+            {
+                gameManager.InvokOnGameOver((int)Player.Player1);
+            }
+            else if (player == Player.Player2)
+            {
+                gameManager.InvokOnGameOver((int)Player.Player2);
+            }
         }
 #region VictoryConditionChecking
         private bool CheckForTie()
