@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Height="400" Width="500" Margin="71,0">
+        <Grid x:Name="buttonGrid" Grid.Row="0" Height="400" Width="500" Margin="71,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>

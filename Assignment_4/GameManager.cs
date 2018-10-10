@@ -8,9 +8,9 @@ namespace Assignment_4
 {
     class GameManager
     {
-        private uint player1Score = 0;
-        private uint player2Score = 0;
-        private uint ties = 0;
+        public uint player1Score = 0;
+        public uint player2Score = 0;
+        public uint ties = 0;
 
         private RoundManager currentRoundManager;
 
@@ -18,9 +18,22 @@ namespace Assignment_4
         public event GeneralGameEventHandler OnGameOver;
         public event GeneralGameEventHandler OnNextRound;
 
+        public bool isGameOver = false;
+        public string lastWinningPlayer = "NONE";
+
+        private int roundId = 0;
+
         public void StartNewGame()
         {
-            currentRoundManager = new RoundManager(this);
+            if (currentRoundManager != null)
+            {
+                currentRoundManager.Close();
+                currentRoundManager = null;
+            }
+                
+
+            currentRoundManager = new RoundManager(this, roundId++);
+            isGameOver = false;
         }
 
         private void ResetGame()
@@ -32,9 +45,16 @@ namespace Assignment_4
 
         public int SelectPosition(int x, int y)
         {
-            int player = currentRoundManager.SelectPosition(x, y);
-            InvokeOnNextRound();
-            return player;
+            if (!isGameOver)
+            {
+                int player = currentRoundManager.SelectPosition(x, y);
+                InvokeOnNextRound();
+                return player;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         #region EventHandlers
@@ -44,17 +64,22 @@ namespace Assignment_4
             switch (winnerID)
             {
                 case 0:
+                    lastWinningPlayer = "1";
                     player1Score++;
                     break;
                 case 1:
+                    lastWinningPlayer = "2";
                     player2Score++;
                     break;
                 case 2:
+                    lastWinningPlayer = "TIE";
                     ties++;
                     break;
                 default:
                     throw new InvalidOperationException();
             }
+
+            isGameOver = true;
 
             OnGameOver?.Invoke();
         }

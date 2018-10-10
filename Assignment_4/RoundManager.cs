@@ -11,14 +11,18 @@ namespace Assignment_4
         private GameManager gameManager;
 
         private Player[,] gameBoard = new Player[3, 3];
-        private int currentRound = 0;
+        private int currentRound = 1;
         
         public enum Player { Player1, Player2, None }
         public Player currentPlayer = Player.Player1;
 
-        public RoundManager(GameManager gameManager)
+
+        private int roundManagerId = -1;
+
+        public RoundManager(GameManager gameManager, int roundManagerId)
         {
             this.gameManager = gameManager;
+            this.roundManagerId = roundManagerId;
 
             gameManager.OnNextRound += NextRound;
             gameManager.OnNextRound += CheckForEndConditions;
@@ -32,23 +36,42 @@ namespace Assignment_4
             }
         }
 
+        public void Close()
+        {
+            gameManager.OnNextRound -= NextRound;
+            gameManager.OnNextRound -= CheckForEndConditions;
+            gameManager = null;
+        }
+
         public int SelectPosition(int x, int y)
         {
-            gameBoard[x, y] = currentPlayer;
-            return (int)currentPlayer;
+            SetCurrentPlayer();
+            if (gameBoard[x, y] == Player.None)
+            {
+                gameBoard[x, y] = currentPlayer;
+                return (int)currentPlayer;
+            }
+            else
+            {
+                --currentRound;
+                return (int)gameBoard[x, y];
+            }
         }
 
         private void NextRound()
         {
-            ++currentRound;
+            currentRound++;   
+        }
 
-            switch(currentPlayer)
+        private void SetCurrentPlayer()
+        {
+            switch(currentRound % 2)
             {
-                case Player.Player1:
-                    currentPlayer = Player.Player2;
-                    break;
-                case Player.Player2:
+                case 1:
                     currentPlayer = Player.Player1;
+                    break;
+                case 0:
+                    currentPlayer = Player.Player2;
                     break;
             }
         }
@@ -58,11 +81,7 @@ namespace Assignment_4
             Player player = CheckIfPlayerWon();
             bool tieFlag = CheckForTie();
 
-            if (tieFlag)
-            {
-                gameManager.InvokOnGameOver((int)Player.None);
-            }
-
+            
             if (player == Player.Player1)
             {
                 gameManager.InvokOnGameOver((int)Player.Player1);
@@ -70,6 +89,13 @@ namespace Assignment_4
             else if (player == Player.Player2)
             {
                 gameManager.InvokOnGameOver((int)Player.Player2);
+            }
+            else
+            {
+                if (tieFlag)
+                {
+                    gameManager.InvokOnGameOver((int)Player.None);
+                }
             }
         }
 #region VictoryConditionChecking
@@ -96,7 +122,8 @@ namespace Assignment_4
         private Player CheckIfPlayerWon()
         {
             // Check for player to have won
-            Player[] playerWinArray = new Player[3];
+            Player[] playerWinArray = { Player.None, Player.None, Player.None };
+            
             playerWinArray[0] = CheckDiagonals();
             playerWinArray[1] = CheckHorizontal();
             playerWinArray[2] = CheckVertical();
