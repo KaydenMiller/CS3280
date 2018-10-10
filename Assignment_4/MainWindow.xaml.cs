@@ -20,8 +20,17 @@ namespace Assignment_4
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// the gameManager
+        /// </summary>
         GameManager gameManager = new GameManager();
+        /// <summary>
+        /// The images to place into the button.content property
+        /// </summary>
         string[] images = System.IO.Directory.GetFiles("../../Resources/Images");
+        /// <summary>
+        /// an image list to store the images.
+        /// </summary>
         List<BitmapImage> imageList = new List<BitmapImage>();
 
         /// <summary>
