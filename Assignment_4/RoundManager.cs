@@ -8,17 +8,39 @@ namespace Assignment_4
 {
     class RoundManager
     {
+        /// <summary>
+        /// The games master game manager
+        /// </summary>
         private GameManager gameManager;
 
+        /// <summary>
+        /// the current rounds gameboard
+        /// </summary>
         private Player[,] gameBoard = new Player[3, 3];
+        /// <summary>
+        /// the current round
+        /// </summary>
         private int currentRound = 1;
         
+        /// <summary>
+        /// enum to represent the players and no player at all
+        /// </summary>
         public enum Player { Player1, Player2, None }
+        /// <summary>
+        /// the current player
+        /// </summary>
         public Player currentPlayer = Player.Player1;
 
-
+        /// <summary>
+        /// roundManagers id value (debug purposes only)
+        /// </summary>
         private int roundManagerId = -1;
 
+        /// <summary>
+        /// The round managers constructor
+        /// </summary>
+        /// <param name="gameManager"></param>
+        /// <param name="roundManagerId"></param>
         public RoundManager(GameManager gameManager, int roundManagerId)
         {
             this.gameManager = gameManager;
@@ -36,6 +58,10 @@ namespace Assignment_4
             }
         }
 
+        /// <summary>
+        /// function to close the round manager and remove any event listeners.
+        /// allows the class to be properly garbage collected.
+        /// </summary>
         public void Close()
         {
             gameManager.OnNextRound -= NextRound;
@@ -43,6 +69,13 @@ namespace Assignment_4
             gameManager = null;
         }
 
+        /// <summary>
+        /// This is the function that will update the game board to the current players 
+        /// enumerator. And return the player id back to the GameManager.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public int SelectPosition(int x, int y)
         {
             SetCurrentPlayer();
@@ -58,11 +91,17 @@ namespace Assignment_4
             }
         }
 
+        /// <summary>
+        /// Moves the game to the next round.
+        /// </summary>
         private void NextRound()
         {
             currentRound++;   
         }
 
+        /// <summary>
+        /// Sets the current player to be based on the currentRound
+        /// </summary>
         private void SetCurrentPlayer()
         {
             switch(currentRound % 2)
@@ -76,6 +115,9 @@ namespace Assignment_4
             }
         }
 
+        /// <summary>
+        /// Master control function to check for ending conditions
+        /// </summary>
         private void CheckForEndConditions()
         {
             Player player = CheckIfPlayerWon();
@@ -99,6 +141,10 @@ namespace Assignment_4
             }
         }
 #region VictoryConditionChecking
+        /// <summary>
+        /// Check or a TIE ending condition
+        /// </summary>
+        /// <returns></returns>
         private bool CheckForTie()
         {
             int totalFilledTiles = 0;
@@ -119,6 +165,10 @@ namespace Assignment_4
                 return false;
         }
 
+        /// <summary>
+        /// Check to see if a player has won. If so return that player.
+        /// </summary>
+        /// <returns></returns>
         private Player CheckIfPlayerWon()
         {
             // Check for player to have won
@@ -139,6 +189,10 @@ namespace Assignment_4
             return Player.None;
         }
 
+        /// <summary>
+        /// Check for a player to win in the diagonal directions
+        /// </summary>
+        /// <returns></returns>
         private Player CheckDiagonals()
         {
             if (gameBoard[0,0] != Player.None ||
@@ -170,6 +224,10 @@ namespace Assignment_4
             return Player.None;
         }
 
+        /// <summary>
+        /// Check to see if a player has won in the horizontal direction.
+        /// </summary>
+        /// <returns></returns>
         private Player CheckHorizontal()
         {
             for (int y = 0; y < 3; y++)
@@ -194,6 +252,10 @@ namespace Assignment_4
             return Player.None;
         }
 
+        /// <summary>
+        /// Check to see if a player has won in the vertical direction
+        /// </summary>
+        /// <returns></returns>
         private Player CheckVertical()
         {
             for (int x = 0; x < 3; x++)
