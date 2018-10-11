@@ -7,13 +7,19 @@ using Assignment_5.Models;
 
 namespace Assignment_5.Controllers
 {
-    class GameManager
+    public class GameManager
     {
         Game currentGame = null;
 
         public void CreateGame(GameType gameType)
         {
             currentGame = new Game(gameType);
+        }
+
+        public void StartGame()
+        {
+            if (currentGame != null)
+                currentGame.StartGame();
         }
     }
 }

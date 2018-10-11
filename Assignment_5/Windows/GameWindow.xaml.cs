@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Assignment_5.Controllers;
 
 namespace Assignment_5.Windows
 {
@@ -19,9 +20,26 @@ namespace Assignment_5.Windows
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow()
+        GameManager gameManager;
+        MainMenuWindow mainMenu;
+
+        public GameWindow(ref GameManager gm, MainMenuWindow mainMenu)
         {
             InitializeComponent();
+
+            gameManager = gm;
+            this.mainMenu = mainMenu;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            gameManager.StartGame();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            mainMenu.Show();
+            Close();
         }
     }
 }

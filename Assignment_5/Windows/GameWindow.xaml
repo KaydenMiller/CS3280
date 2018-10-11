@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_5.Windows"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800">
+        Title="GameWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFFFCECE" Grid.Row="2" Stroke="Black"/>
+
+        <TextBlock x:Name="tbkGameTitle" Margin="10,1" TextWrapping="Wrap" Text="MATH BATTLE" FontSize="29.333" FontWeight="Bold" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Grid Margin="10" Grid.Row="2">
+            <StackPanel Margin="0,129.185" Orientation="Horizontal" d:LayoutOverrides="Width" HorizontalAlignment="Center">
+
+                <TextBlock x:Name="tbkFirstOperand" TextWrapping="Wrap" VerticalAlignment="Center" d:LayoutOverrides="TopMargin, BottomMargin, LeftPosition, RightPosition" Padding="10,0" FontSize="16"><Run Text="FIRST OPERAND"/></TextBlock>
+                <TextBlock x:Name="tbkOperation" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Text="*" d:LayoutOverrides="TopMargin, BottomMargin" Padding="10,0" FontSize="16"/>
+                <TextBlock x:Name="tbkSecondOperand" Margin="0" TextWrapping="Wrap" Text="SECOND OPERAND" VerticalAlignment="Center" d:LayoutOverrides="TopMargin, BottomMargin" Padding="10,0" FontSize="16"/>
+                <TextBox x:Name="txtUserAnswer" TextWrapping="Wrap" Text="TextBox" FontSize="16" Margin="10,0,10,-11" Padding="0" Width="90.843"/>
+            </StackPanel>
+        </Grid>
+        <TextBlock x:Name="tbkGameMode" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="GAME MODE" FontSize="21.333" FontWeight="Bold" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnExit" Content="Exit" d:LayoutOverrides="LeftPosition, RightPosition" FontSize="16" Padding="10" Margin="10,5" Click="btnExit_Click" Loaded="btnExit_Loaded"/>
+            <Button x:Name="btnSubmit" Content="Submit" FontSize="16" Padding="10" Margin="10,5"/>
+            <Button x:Name="btnNext" Content="Next" FontSize="16" Padding="10" Margin="10,5"/>
+        </StackPanel>
+
     </Grid>
 </Window>
