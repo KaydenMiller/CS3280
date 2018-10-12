@@ -20,8 +20,6 @@ namespace Assignment_5.Windows
     /// </summary>
     public partial class MainMenuWindow : Window
     {
-        GameManager gameManager = new GameManager();
-
         public MainMenuWindow()
         {
             InitializeComponent();
@@ -29,31 +27,27 @@ namespace Assignment_5.Windows
 
         private void btnAdditionGame_Click(object sender, RoutedEventArgs e)
         {
-            gameManager.CreateGame(GameType.Addition);
-            LoadGameWindow();
+            LoadGameWindow(GameType.Addition);
         }
 
         private void btnSubtractionGame_Click(object sender, RoutedEventArgs e)
         {
-            gameManager.CreateGame(GameType.Subtraction);
-            LoadGameWindow();
+            LoadGameWindow(GameType.Subtraction);
         }
 
         private void btnMultiplicationGame_Click(object sender, RoutedEventArgs e)
         {
-            gameManager.CreateGame(GameType.Multiplication);
-            LoadGameWindow();
+            LoadGameWindow(GameType.Multiplication);
         }
 
         private void btnDivisionGame_Click(object sender, RoutedEventArgs e)
         {
-            gameManager.CreateGame(GameType.Division);
-            LoadGameWindow();
+            LoadGameWindow(GameType.Division);
         }
 
-        private void LoadGameWindow()
+        private void LoadGameWindow(GameType gameType)
         {
-            GameWindow gameWindow = new GameWindow(ref gameManager, this);
+            GameWindow gameWindow = new GameWindow(this, gameType);
             Hide();
             gameWindow.Show();
         }

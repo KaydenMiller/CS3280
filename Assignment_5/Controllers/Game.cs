@@ -8,41 +8,61 @@ namespace Assignment_5.Controllers
 {
     public enum GameType { Addition, Subtraction, Multiplication, Division }
 
-    struct RoundInfo
+    public struct RoundInfo
     {
         public int FirstOperand { get; set; }
         public int SecondOperand { get; set; }
         public int Answer { get; set; }
+        public string Operator { get; set; }
     }
 
-    class Game
+    public class Game
     {
         const int TOTAL_ROUNDS = 10;
         const int DIFFICULTY_MAX = 10;
         const int DIFFICULTY_MIN = 0;
 
         public int CurrentRound { get; private set; }
+        public GameType CurrentGameType { get; private set; }
+        public int RoundsCorrect { get; private set; }
+        public bool GameOver { get; private set; }
 
         private DateTime startTime, endTime;
         private RoundInfo[] rounds = new RoundInfo[TOTAL_ROUNDS];
 
-        private delegate RoundInfo MakeRoundFunction();
+        private delegate RoundInfo MakeRoundFunction(Random rand);
+        private class MakeRoundArgs
+        {
+            public Random rand;
+
+            public MakeRoundArgs(Random rand)
+            {
+                this.rand = rand;
+            }
+        }
 
         public Game(GameType levelType)
         {
+            Random rand = new Random(DateTime.Now.Millisecond);
+            GameOver = false;
+
             switch (levelType)
             {
                 case GameType.Addition:
-                    rounds = MakeRounds(MakeAdditionRound);
+                    CurrentGameType = GameType.Addition;
+                    rounds = MakeRounds(MakeAdditionRound, new MakeRoundArgs(rand));
                     break;
                 case GameType.Subtraction:
-                    rounds = MakeRounds(MakeSubtractionRound);
+                    CurrentGameType = GameType.Subtraction;
+                    rounds = MakeRounds(MakeSubtractionRound, new MakeRoundArgs(rand));
                     break;
                 case GameType.Multiplication:
-                    rounds = MakeRounds(MakeMultiplicationRound);
+                    CurrentGameType = GameType.Multiplication;
+                    rounds = MakeRounds(MakeMultiplicationRound, new MakeRoundArgs(rand));
                     break;
                 case GameType.Division:
-                    rounds = MakeRounds(MakeDivisionRound);
+                    CurrentGameType = GameType.Division;
+                    rounds = MakeRounds(MakeDivisionRound, new MakeRoundArgs(rand));
                     break;
             }
         }
@@ -55,6 +75,7 @@ namespace Assignment_5.Controllers
 
         public void EndGame()
         {
+            GameOver = true;
             endTime = DateTime.Now;
         }
 
@@ -64,17 +85,34 @@ namespace Assignment_5.Controllers
         /// then it is the total elasped time for that game.
         /// </summary>
         /// <returns>Seconds Elapsed</returns>
-        public int GetElapsedTime()
+        public TimeSpan GetElapsedTime()
         {
-            if (endTime != null)
-                return endTime.Second - startTime.Second;
+            if (!GameOver)
+            {
+                return DateTime.Now.Subtract(startTime);
+            }
             else
-                return DateTime.Now.Second - startTime.Second;
+            {
+                return endTime.Subtract(startTime);
+            }
         }
 
         public void NextRound()
         {
-            CurrentRound++;
+            if (CurrentRound + 1 < TOTAL_ROUNDS)
+                CurrentRound++;
+            else
+                EndGame();
+        }
+
+        public bool ValidateUserAnswer(int answer)
+        {
+            if (answer == rounds[CurrentRound].Answer)
+            {
+                RoundsCorrect++;
+                return true;
+            }
+            return false;
         }
 
         public RoundInfo GetCurrentRoundInfo()
@@ -82,32 +120,31 @@ namespace Assignment_5.Controllers
             return rounds[CurrentRound];
         }
 
-        private RoundInfo[] MakeRounds(MakeRoundFunction makeRoundFunction)
+        private RoundInfo[] MakeRounds(MakeRoundFunction makeRoundFunction, MakeRoundArgs args)
         {
             RoundInfo[] rounds = new RoundInfo[TOTAL_ROUNDS];
             for (int i = 0; i < TOTAL_ROUNDS; i++)
             {
-                rounds[i] = makeRoundFunction();
+                rounds[i] = makeRoundFunction(args.rand);
             }
             return rounds;
         }
 
-        private RoundInfo MakeAdditionRound()
+        private RoundInfo MakeAdditionRound(Random rand)
         {
             RoundInfo round = new RoundInfo();
-            Random rand = new Random();
 
             round.FirstOperand = rand.Next(DIFFICULTY_MIN, DIFFICULTY_MAX + 1);
             round.SecondOperand = rand.Next(DIFFICULTY_MIN, DIFFICULTY_MAX + 1);
             round.Answer = round.FirstOperand + round.SecondOperand;
+            round.Operator = "+";
 
             return round;
         }
 
-        private RoundInfo MakeSubtractionRound()
+        private RoundInfo MakeSubtractionRound(Random rand)
         {
             RoundInfo round = new RoundInfo();
-            Random rand = new Random();
             bool validFlag = false;
 
             do
@@ -119,37 +156,38 @@ namespace Assignment_5.Controllers
             } while (!validFlag);
 
             round.Answer = round.FirstOperand - round.SecondOperand;
+            round.Operator = "-";
 
             return round;
         }
 
-        private RoundInfo MakeMultiplicationRound()
+        private RoundInfo MakeMultiplicationRound(Random rand)
         {
             RoundInfo round = new RoundInfo();
-            Random rand = new Random();
 
-            round.FirstOperand = rand.Next(DIFFICULTY_MIN * DIFFICULTY_MAX + 1);
-            round.SecondOperand = rand.Next(DIFFICULTY_MIN * DIFFICULTY_MAX + 1);
+            round.FirstOperand = rand.Next(DIFFICULTY_MIN, DIFFICULTY_MAX + 1);
+            round.SecondOperand = rand.Next(DIFFICULTY_MIN, DIFFICULTY_MAX + 1);
             round.Answer = round.FirstOperand * round.SecondOperand;
+            round.Operator = "*";
 
             return round;
         }
 
-        private RoundInfo MakeDivisionRound()
+        private RoundInfo MakeDivisionRound(Random rand)
         {
             RoundInfo round = new RoundInfo();
-            Random rand = new Random();
             bool validFlag = false;
 
             do
             {
-                round.FirstOperand = rand.Next(DIFFICULTY_MIN * DIFFICULTY_MAX + 1);
-                round.SecondOperand = rand.Next(DIFFICULTY_MIN + 1 * DIFFICULTY_MAX + 1);
+                round.FirstOperand = rand.Next(DIFFICULTY_MIN, DIFFICULTY_MAX + 1);
+                round.SecondOperand = rand.Next(DIFFICULTY_MIN + 1, DIFFICULTY_MAX + 1);
                 if (round.FirstOperand % round.SecondOperand == 0)
                     validFlag = true;
             } while (!validFlag);
 
             round.Answer = round.FirstOperand / round.SecondOperand;
+            round.Operator = "/";
 
             return round;
         }
