@@ -11,15 +11,13 @@ namespace Assignment_5.Controllers
         // Add CRUD operations methods
         // Create
         void Add(Score score);
-        void AddScores(IEnumerable<Score> scores);
         // Read
         Score GetScore(int index);
         IEnumerable<Score> GetScores();
         // Update
-        void UpdateScores(IEnumerable<Score> scores);
-        void UpdateScore(int index, Score score);
+        void UpdateScore(int index, Score updatedScore);
+        void UpdateScores(IEnumerable<Score> updatedScores);
         // Delete
         void Delete(int index);
-        void DeleteScores();
     }
 }
