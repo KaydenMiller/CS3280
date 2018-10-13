@@ -56,9 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\Game.cs" />
-    <Compile Include="Models\Level.cs" />
-    <Compile Include="Controllers\ScoreKeeper.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Controllers\IScoreRepository.cs" />
+    <Compile Include="Controllers\Score.cs" />
+    <Compile Include="ViewModels\Level.cs" />
+    <Compile Include="ViewModels\User.cs" />
     <Page Include="Windows\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
