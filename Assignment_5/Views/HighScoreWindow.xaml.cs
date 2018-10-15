@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Assignment_5.Windows
+namespace Assignment_5.Views
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for HighScoreWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class HighScoreWindow : Window
     {
-        public LoginWindow()
+        public HighScoreWindow()
         {
             InitializeComponent();
         }

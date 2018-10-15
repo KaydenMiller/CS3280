@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assignment_5.Models;
 
 namespace Assignment_5.Controllers
 {
@@ -29,6 +30,7 @@ namespace Assignment_5.Controllers
 
         private DateTime startTime, endTime;
         private RoundInfo[] rounds = new RoundInfo[TOTAL_ROUNDS];
+        private User currentUser;
 
         private delegate RoundInfo MakeRoundFunction(Random rand);
         private class MakeRoundArgs
@@ -45,6 +47,8 @@ namespace Assignment_5.Controllers
         {
             Random rand = new Random(DateTime.Now.Millisecond);
             GameOver = false;
+
+            currentUser = UserManager.GetCurrentUser();
 
             switch (levelType)
             {
@@ -77,6 +81,11 @@ namespace Assignment_5.Controllers
         {
             GameOver = true;
             endTime = DateTime.Now;
+            ScoreManager.AddScore(new Score
+            {
+                Username = currentUser.Username,
+                Value = ((int)Math.Pow(RoundsCorrect, 3) / (int)Math.Floor(Math.Sqrt(GetElapsedTime().Seconds)))
+            });
         }
 
         /// <summary>

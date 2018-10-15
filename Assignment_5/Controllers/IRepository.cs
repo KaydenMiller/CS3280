@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace Assignment_5.Controllers
 {
-    public interface IScoreRepository
+    public interface IRepository<T>
     {
         // Add CRUD operations methods
         // Create
-        void Add(Score score);
+        void Add(T value);
         // Read
-        Score GetScore(int index);
-        IEnumerable<Score> GetScores();
+        T GetValue(int index);
+        IEnumerable<T> GetValues();
         // Update
-        void UpdateScore(int index, Score updatedScore);
-        void UpdateScores(IEnumerable<Score> updatedScores);
+        void UpdateValue(int index, T updatedValue);
         // Delete
         void Delete(int index);
     }

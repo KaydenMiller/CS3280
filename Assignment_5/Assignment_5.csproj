@@ -55,25 +55,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\FakeRepository.cs" />
+    <Compile Include="Controllers\CSVScoreRepository.cs" />
     <Compile Include="Controllers\Game.cs" />
-    <Compile Include="Controllers\IScoreRepository.cs" />
-    <Compile Include="Controllers\Score.cs" />
-    <Compile Include="ViewModels\Level.cs" />
-    <Compile Include="ViewModels\User.cs" />
-    <Page Include="Windows\GameWindow.xaml">
+    <Compile Include="Controllers\IRepository.cs" />
+    <Compile Include="Controllers\ScoreManager.cs" />
+    <Compile Include="Controllers\CSVUserRepository.cs" />
+    <Compile Include="Exceptions\UserNotAuthenticatedException.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Models\Score.cs" />
+    <Compile Include="Models\User.cs" />
+    <Page Include="Views\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\HighScoreWindow.xaml">
+    <Page Include="Views\HighScoreWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LoginWindow.xaml">
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainMenuWindow.xaml">
+    <Page Include="Views\MainMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,16 +86,16 @@
     </Compile>
     <Compile Include="Controllers\GameManager.cs" />
     <Compile Include="Controllers\UserManager.cs" />
-    <Compile Include="Windows\GameWindow.xaml.cs">
+    <Compile Include="Views\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\HighScoreWindow.xaml.cs">
+    <Compile Include="Views\HighScoreWindow.xaml.cs">
       <DependentUpon>HighScoreWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LoginWindow.xaml.cs">
+    <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainMenuWindow.xaml.cs">
+    <Compile Include="Views\MainMenuWindow.xaml.cs">
       <DependentUpon>MainMenuWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -123,11 +126,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\DataAccess\" />
-    <Folder Include="Infrastructure\Services\" />
-    <Folder Include="Infrastructure\Utilities\" />
     <Folder Include="Resources\Audio\" />
     <Folder Include="Resources\Images\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

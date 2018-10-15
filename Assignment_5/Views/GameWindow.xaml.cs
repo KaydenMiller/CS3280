@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Assignment_5.Controllers;
+using Assignment_5.Extensions;
 
-namespace Assignment_5.Windows
+namespace Assignment_5.Views
 {
     /// <summary>
     /// Interaction logic for GameWindow.xaml
@@ -33,50 +34,91 @@ namespace Assignment_5.Windows
         {
             InitializeComponent();
 
-            this.mainMenu = mainMenu;
+            try
+            {
+                this.mainMenu = mainMenu;
 
-            uiUpdateTimer.Interval = TIMER_REFRESH_RATE_MILLI;
-            uiUpdateTimer.Elapsed += UpdateUiElapsed;
+                uiUpdateTimer.Interval = TIMER_REFRESH_RATE_MILLI;
+                uiUpdateTimer.Elapsed += UpdateUiElapsed;
 
-            currentGame = gameManager.CreateGame(gameType);
+                currentGame = gameManager.CreateGame(gameType);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            currentGame.StartGame();
-            currentRound = currentGame.GetCurrentRoundInfo();
-            UpdateDisplay();
-            uiUpdateTimer.Start();
+            try
+            {
+                currentGame.StartGame();
+                currentRound = currentGame.GetCurrentRoundInfo();
+                UpdateDisplay();
+                uiUpdateTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            currentGame.EndGame();
-            uiUpdateTimer.Stop();
-            uiUpdateTimer.Dispose();
-            mainMenu.Show();
-            Close();
+            try
+            {
+                uiUpdateTimer.Stop();
+                uiUpdateTimer.Dispose();
+                mainMenu.Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void UpdateDisplay()
         {
-            tbkFirstOperand.Text = currentRound.FirstOperand.ToString();
-            tbkSecondOperand.Text = currentRound.SecondOperand.ToString();
-            tbkOperation.Text = currentRound.Operator;
-            tbkGameMode.Text = Enum.GetName(typeof(GameType), currentGame.CurrentGameType);
-            tbkRoundInfo.Text = String.Format("Round: {0}/10", currentGame.CurrentRound + 1);
-            UpdateTime();
+            try
+            {
+                tbkFirstOperand.Text = currentRound.FirstOperand.ToString();
+                tbkSecondOperand.Text = currentRound.SecondOperand.ToString();
+                tbkOperation.Text = currentRound.Operator;
+                tbkGameMode.Text = Enum.GetName(typeof(GameType), currentGame.CurrentGameType);
+                tbkRoundInfo.Text = String.Format("Round: {0}/10", currentGame.CurrentRound + 1);
+                UpdateTime();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void UpdateTime()
         {
-            TimeSpan duration = currentGame.GetElapsedTime();
-            tbkGameTime.Text = duration.ToString(@"mm\:ss");
+            try
+            {
+                TimeSpan duration = currentGame.GetElapsedTime();
+                tbkGameTime.Text = duration.ToString(@"mm\:ss");
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void UpdateUiElapsed(object source, ElapsedEventArgs e)
         {
-            Dispatcher.Invoke(UpdateTime);
+            try
+            {
+                Dispatcher.Invoke(UpdateTime);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -110,25 +152,37 @@ namespace Assignment_5.Windows
             }
             catch (ResourceReferenceKeyNotFoundException resourceEx)
             {
+                resourceEx.Log();
                 MessageBox.Show(resourceEx.Message, "Resource Not Found Exception!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
             }
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            if (!currentGame.GameOver)
+            try
             {
-                // The game is not yet over go to the next round
-                currentRound = currentGame.GetCurrentRoundInfo();
-                UpdateDisplay();
-                tbkResult.Visibility = Visibility.Hidden;
-                btnSubmit.IsEnabled = true;
-                btnNext.IsEnabled = false;
+                if (!currentGame.GameOver)
+                {
+                    // The game is not yet over go to the next round
+                    currentRound = currentGame.GetCurrentRoundInfo();
+                    UpdateDisplay();
+                    tbkResult.Visibility = Visibility.Hidden;
+                    btnSubmit.IsEnabled = true;
+                    btnNext.IsEnabled = false;
+                }
+                else
+                {
+                    // The game is over go to the score screen
+                    MessageBox.Show("THIS IS A SCORE SCREEN!");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // The game is over go to the score screen
-                MessageBox.Show("THIS IS A SCORE SCREEN!");
+                ex.Log();
             }
         }
     }

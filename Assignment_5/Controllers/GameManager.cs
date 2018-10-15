@@ -4,7 +4,10 @@
     {
         public Game CreateGame(GameType gameType)
         {
-            return new Game(gameType);
+            if (UserManager.GetCurrentUser() != null)
+                return new Game(gameType);
+            else
+                throw new 
         }
     }
 }
