@@ -7,7 +7,7 @@
             if (UserManager.GetCurrentUser() != null)
                 return new Game(gameType);
             else
-                throw new 
+                throw new Assignment_5.Exceptions.UserNotAuthenticatedException();
         }
     }
 }

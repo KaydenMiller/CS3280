@@ -78,6 +78,8 @@
             <Button x:Name="btnSubtractionGame" Content="SUBTRACTION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnSubtractionGame_Click"/>
             <Button x:Name="btnMultiplicationGame" Content="MULTIPLICATION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnMultiplicationGame_Click"/>
             <Button x:Name="btnDivisionGame" Content="DIVISION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnDivisionGame_Click"/>
+            <Button x:Name="btnScore" Content="HIGH SCORES" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnScore_Click"/>
+            <Button x:Name="btnExit" Content="EXIT" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnExit_Click"/>
         </StackPanel>
     </Grid>
 </Window>

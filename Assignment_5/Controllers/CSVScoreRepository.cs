@@ -49,10 +49,10 @@ namespace Assignment_5.Controllers
                 while ((line = streamReader.ReadLine()) != null)
                 {
                     var elems = line.Split(',');
-                    var score = new Score() {
+                    scores.Add(new Score() {
                         Username = elems[0],
                         Value = int.Parse(elems[1])
-                    };
+                    });
                 }
                 streamReader.Close();
             }

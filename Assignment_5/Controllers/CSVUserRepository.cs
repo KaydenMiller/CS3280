@@ -24,7 +24,7 @@ namespace Assignment_5.Controllers
             {
                 using (var sw = new StreamWriter(fs))
                 {
-                    var output = $"{value.Username},{value.Age}";
+                    var output = $"{value.Username.ToUpper()},{value.Age}";
                     sw.WriteLine(output);
                 }
             }
@@ -32,6 +32,12 @@ namespace Assignment_5.Controllers
 
         public void Delete(int index)
         {
+            List<User> users = GetValues().ToList();
+            users.RemoveAt(index);
+
+            // Update the list of users
+            using (FileStream fs = new FileStream(path, FileMode. | FileMode.Truncate))
+            
             throw new NotImplementedException();
         }
 
@@ -42,23 +48,13 @@ namespace Assignment_5.Controllers
 
         public IEnumerable<User> GetValues()
         {
-            var users = new List<User>();
-
-            if (File.Exists(path))
-            {
-                var streamReader = new StreamReader(path);
-                string line;
-                while ((line = streamReader.ReadLine()) != null)
-                {
-                    var elems = line.Split(',');
-                    var score = new User()
-                    {
-                        Username = elems[0],
-                        Age = int.Parse(elems[1])
-                    };
-                }
-                streamReader.Close();
-            }
+            var users = from line in File.ReadAllLines(path)
+                        let elems = line.Split(',')
+                        select new User
+                        {
+                            Username = elems[0],
+                            Age = int.Parse(elems[1])
+                        };
 
             return users;
         }

@@ -141,6 +141,7 @@ namespace Assignment_5.Views
                 tbkResult.Visibility = Visibility.Visible;
                 btnSubmit.IsEnabled = false;
                 btnNext.IsEnabled = true;
+                btnNext.IsDefault = true;
 
                 // Try to go to the next round
                 currentGame.NextRound();
@@ -173,11 +174,15 @@ namespace Assignment_5.Views
                     tbkResult.Visibility = Visibility.Hidden;
                     btnSubmit.IsEnabled = true;
                     btnNext.IsEnabled = false;
+                    btnSubmit.IsDefault = true;
+                    txtUserAnswer.Text = "";
                 }
                 else
                 {
                     // The game is over go to the score screen
-                    MessageBox.Show("THIS IS A SCORE SCREEN!");
+                    HighScoreWindow highScoreWind = new HighScoreWindow(mainMenu);
+                    highScoreWind.Show();
+                    this.Close();
                 }
             }
             catch (Exception ex)

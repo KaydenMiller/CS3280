@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Assignment_5.Controllers;
+using Assignment_5.Models;
 
 namespace Assignment_5.Views
 {
@@ -19,9 +21,31 @@ namespace Assignment_5.Views
     /// </summary>
     public partial class HighScoreWindow : Window
     {
-        public HighScoreWindow()
+        IEnumerable<Score> Top10Scores = Enumerable.Empty<Score>();
+        MainMenuWindow mainMenu = null;
+
+        public HighScoreWindow(MainMenuWindow mainMenu)
         {
             InitializeComponent();
+            Top10Scores = ScoreManager.GetTop10Scores();
+            this.mainMenu = mainMenu;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Score[] scores = Top10Scores.ToArray();
+            lbxHighScores.ItemsSource = scores.Select((x, i) => new
+            {
+                Index = i + 1,
+                x.Username,
+                x.Value
+            });
+        }
+
+        private void btnMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            mainMenu.Show();
+            this.Close();
         }
     }
 }

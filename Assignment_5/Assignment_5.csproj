@@ -86,6 +86,8 @@
     </Compile>
     <Compile Include="Controllers\GameManager.cs" />
     <Compile Include="Controllers\UserManager.cs" />
+    <Compile Include="Utilities\Enums.cs" />
+    <Compile Include="Utilities\OperationResult.cs" />
     <Compile Include="Views\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>

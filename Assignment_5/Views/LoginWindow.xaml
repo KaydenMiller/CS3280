@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
+        <TextBlock x:Name="tbxGameTitle" Text="MATH BATTLE" Grid.Row="0" Style="{DynamicResource TextBlockStyle_Title}" FontSize="30"/>
+        
+        <TextBlock x:Name="tbxWindowTitle" Text="LOGIN" Grid.Row="1" Style="{DynamicResource TextBlockStyle_Title}" FontSize="25"/>
+
+        <StackPanel Orientation="Vertical" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock Text="Username:" FontSize="22"/>
+                <TextBox x:Name="txtUsername" Width="150" FontSize="22"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <TextBlock Text="Age:" FontSize="22"/>
+                <TextBox x:Name="txtAge" Width="150" FontSize="22"/>
+            </StackPanel>
+
+            <Button x:Name="btnLogin" Content="LOGIN" FontSize="22" Margin="5" Click="btnLogin_Click" IsDefault="True"/>
+        </StackPanel>
     </Grid>
 </Window>

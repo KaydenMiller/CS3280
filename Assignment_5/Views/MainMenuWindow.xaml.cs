@@ -39,5 +39,17 @@ namespace Assignment_5.Views
             Hide();
             gameWindow.Show();
         }
+
+        private void btnScore_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            HighScoreWindow highScoreWindow = new HighScoreWindow(this);
+            highScoreWindow.Show();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

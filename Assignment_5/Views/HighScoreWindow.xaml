@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_5.Views"
         mc:Ignorable="d"
-        Title="HighScoreWindow" Height="450" Width="800">
+        Title="HighScoreWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="tbkGameTitle" Style="{DynamicResource TextBlockStyle_Title}" FontSize="29.333" Margin="10,1" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+        <TextBlock x:Name="tbkWindowTitle" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="High Scores" FontSize="29.333" FontWeight="Bold" TextAlignment="Center"/>
+        <ListBox x:Name="lbxHighScores" Grid.Row="2" HorizontalAlignment="Center" 
+                 Margin="5" BorderThickness="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="15" FontWeight="SemiBold">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}. {1}, {2}">
+                                    <Binding Path="Index"/>
+                                    <Binding Path="Username"/>
+                                    <Binding Path="Value"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="btnMainMenu" Content="HOME" FontSize="22" FontWeight="Bold"
+                Grid.Row="3" HorizontalAlignment="Center" Margin="5" Padding="10 2"
+                Click="btnMainMenu_Click"/>
     </Grid>
 </Window>
