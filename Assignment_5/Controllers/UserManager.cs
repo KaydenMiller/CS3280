@@ -18,7 +18,7 @@ namespace Assignment_5.Controllers
             OperationResult operationResult = new OperationResult();
             username = username.ToUpper();
 
-            if (GetUserFromRepo(username) != null)
+            if (GetUserFromRepo(username) != Enumerable.Empty<User>())
             {
                 List<User> users = GetUserFromRepo(username).ToList();
                 currentUser = users[0];
@@ -52,7 +52,7 @@ namespace Assignment_5.Controllers
                 select user;
 
             if (query.Count() == 0)
-                return null;
+                return Enumerable.Empty<User>();
 
             return query.Take(1);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -27,6 +28,7 @@ namespace Assignment_5.Views
         Game currentGame;
         RoundInfo currentRound;
         Timer uiUpdateTimer = new Timer();
+        SoundPlayer soundPlayer = new SoundPlayer();
 
         const int TIMER_REFRESH_RATE_MILLI = 500;
 
@@ -131,17 +133,21 @@ namespace Assignment_5.Views
                 {
                     tbkResult.Text = "SUCCESS!";
                     tbkResult.Style = FindResource("TextBlockStyle_Success") as Style;
-                    
+                    soundPlayer.SoundLocation = "Resources/Audio/TaDa.wav";
                 }
                 else
                 {
                     tbkResult.Text = "INCORRECT!";
                     tbkResult.Style = FindResource("TextBlockStyle_Failure") as Style;
+                    soundPlayer.SoundLocation = "Resources/Audio/Wrong.wav";
                 }
                 tbkResult.Visibility = Visibility.Visible;
                 btnSubmit.IsEnabled = false;
                 btnNext.IsEnabled = true;
                 btnNext.IsDefault = true;
+
+                // Play audio that was loaded
+                soundPlayer.Play();
 
                 // Try to go to the next round
                 currentGame.NextRound();

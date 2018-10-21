@@ -36,9 +36,17 @@ namespace Assignment_5.Controllers
             users.RemoveAt(index);
 
             // Update the list of users
-            using (FileStream fs = new FileStream(path, FileMode. | FileMode.Truncate))
-            
-            throw new NotImplementedException();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate | FileMode.Truncate, FileAccess.Write))
+            {
+                using (var sw = new StreamWriter(fs))
+                {
+                    foreach (User usr in users)
+                    {
+                        var output = $"{usr.Username.ToUpper()},{usr.Age}";
+                        sw.WriteLine(output);
+                    }
+                }
+            }
         }
 
         public User GetValue(int index)
@@ -48,6 +56,9 @@ namespace Assignment_5.Controllers
 
         public IEnumerable<User> GetValues()
         {
+            if (!File.Exists(path))
+                return Enumerable.Empty<User>();
+
             var users = from line in File.ReadAllLines(path)
                         let elems = line.Split(',')
                         select new User
@@ -61,7 +72,8 @@ namespace Assignment_5.Controllers
 
         public void UpdateValue(int index, User updatedValue)
         {
-            throw new NotImplementedException();
+            Delete(index);
+            Add(updatedValue);
         }
     }
 }
