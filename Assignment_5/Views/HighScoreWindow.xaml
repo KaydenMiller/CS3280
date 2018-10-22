@@ -17,6 +17,10 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
+        <Image x:Name="imgBackground" Stretch="Fill" Grid.Row="0" Grid.RowSpan="5"
+               Source="..\Resources\Images\StarWarsHighScore.jpg"/>
+        
         <TextBlock x:Name="tbkGameTitle" Style="{DynamicResource TextBlockStyle_Title}" FontSize="29.333" Margin="10,1" HorizontalAlignment="Stretch" TextAlignment="Center"/>
         <TextBlock x:Name="tbkWindowTitle" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="High Scores" FontSize="29.333" FontWeight="Bold" TextAlignment="Center"/>
 
@@ -29,7 +33,7 @@
                    FontSize="22"/>
 
         <ListBox x:Name="lbxHighScores" Grid.Row="3" HorizontalAlignment="Center" 
-                 Margin="5" BorderThickness="0">
+                 Margin="5" BorderThickness="0" Background="White">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

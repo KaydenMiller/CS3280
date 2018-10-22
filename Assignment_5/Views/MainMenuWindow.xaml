@@ -73,6 +73,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <Image x:Name="imgBackground"
+               Stretch="Fill" Grid.Row="0" Grid.RowSpan="3"
+               Source="..\Resources\Images\StarWarsMain.jpeg"/>
+
         <TextBlock x:Name="tbkGameTitle" Margin="0,1" TextWrapping="Wrap" 
                    Text="MATH BATTLE" FontWeight="Bold" FontSize="25" 
                    TextAlignment="Center" Grid.Row="0"/>

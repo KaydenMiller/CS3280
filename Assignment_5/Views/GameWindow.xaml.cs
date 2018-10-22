@@ -30,15 +30,30 @@ namespace Assignment_5.Views
         Timer uiUpdateTimer = new Timer();
         SoundPlayer soundPlayer = new SoundPlayer();
 
+        BitmapImage[] images =
+        {
+            new BitmapImage(new Uri(@"Resources/Images/StarWarsAddition.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"Resources/Images/StarWarsSubtract.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"Resources/Images/StarWarsMultiply.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"Resources/Images/StarWarsDivide.jpg", UriKind.Relative))
+        };
+        public BitmapImage CurrentImage { get; set; }
+        
+
         const int TIMER_REFRESH_RATE_MILLI = 500;
 
         public GameWindow(MainMenuWindow mainMenu, GameType gameType)
         {
             InitializeComponent();
+            DataContext = this;
 
             try
             {
                 this.mainMenu = mainMenu;
+
+                txtUserAnswer.Focus();
+
+                SetImage(gameType);
 
                 uiUpdateTimer.Interval = TIMER_REFRESH_RATE_MILLI;
                 uiUpdateTimer.Elapsed += UpdateUiElapsed;
@@ -48,6 +63,25 @@ namespace Assignment_5.Views
             catch (Exception ex)
             {
                 ex.Log();
+            }
+        }
+
+        private void SetImage(GameType gt)
+        {
+            switch (gt)
+            {
+                case GameType.Addition:
+                    CurrentImage = images[0];
+                    break;
+                case GameType.Subtraction:
+                    CurrentImage = images[1];
+                    break;
+                case GameType.Multiplication:
+                    CurrentImage = images[2];
+                    break;
+                case GameType.Division:
+                    CurrentImage = images[3];
+                    break;
             }
         }
 

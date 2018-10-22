@@ -34,19 +34,24 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FFFFCECE" Grid.Row="2" Stroke="Black"/>
 
-        <TextBlock x:Name="tbkGameTitle" Margin="10,1" TextWrapping="Wrap" Text="MATH BATTLE" FontSize="29.333" FontWeight="Bold" TextAlignment="Center" Style="{DynamicResource TextBlockStyle_Title}" HorizontalAlignment="Stretch"/>
-        <TextBlock x:Name="tbkGameMode" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="GAME MODE" FontSize="21.333" FontWeight="Bold" TextAlignment="Center"/>
+        <Image x:Name="imgBackground" Stretch="Fill"
+               Grid.Row="0" Grid.RowSpan="4" 
+               Source="{Binding Path=CurrentImage}"/>
+
+        <TextBlock x:Name="tbkGameTitle" Foreground="White" Margin="10,1" TextWrapping="Wrap" Text="MATH BATTLE" FontSize="29.333" FontWeight="Bold" TextAlignment="Center" Style="{DynamicResource TextBlockStyle_Title}" HorizontalAlignment="Stretch"/>
+        <TextBlock x:Name="tbkGameMode" Foreground="White" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="GAME MODE" FontSize="21.333" FontWeight="Bold" TextAlignment="Center"/>
         
         <Grid Margin="10" Grid.Row="2">
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.50"/>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-
                 <TextBlock x:Name="tbkFirstOperand" TextWrapping="Wrap" Padding="10,0" FontSize="16"><Run Text="FIRST OPERAND"/></TextBlock>
                 <TextBlock x:Name="tbkOperation" TextWrapping="Wrap" TextAlignment="Center" Text="*" Padding="10,0" FontSize="16"/>
                 <TextBlock x:Name="tbkSecondOperand" Margin="0" TextWrapping="Wrap" Text="SECOND OPERAND" Padding="10,0" FontSize="16"/>
