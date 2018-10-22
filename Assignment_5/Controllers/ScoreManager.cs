@@ -9,7 +9,7 @@ namespace Assignment_5.Controllers
 {
     public static class ScoreManager
     {
-        private static readonly IRepository<Score> scoreRepo = new CSVScoreRepository();
+        private static readonly IRepository<int, Score> scoreRepo = new CSVScoreRepository();
 
         public static IEnumerable<Score> GetAllScores()
         {

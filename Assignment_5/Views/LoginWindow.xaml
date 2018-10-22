@@ -10,14 +10,20 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <TextBlock x:Name="tbxGameTitle" Text="MATH BATTLE" Grid.Row="0" Style="{DynamicResource TextBlockStyle_Title}" FontSize="30"/>
-        
-        <TextBlock x:Name="tbxWindowTitle" Text="LOGIN" Grid.Row="1" Style="{DynamicResource TextBlockStyle_Title}" FontSize="25"/>
+
+        <TextBlock x:Name="tbxGameTitle" Text="MATH BATTLE" Grid.Row="0" Style="{DynamicResource TextBlockStyle_Title}" FontSize="30" Margin="0,1"/>
+
+        <TextBlock x:Name="tbxWindowTitle" Text="LOGIN" Grid.Row="1" Style="{DynamicResource TextBlockStyle_Title}" FontSize="25" Margin="0,1"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="tbkInstructions" HorizontalAlignment="Center"
+                       Text="Please enter your username and age."/>
+            <TextBlock x:Name="tbkInstructions2" HorizontalAlignment="Center"
+                       Text="To update your age, enter username and updated age."/>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <TextBlock Text="Username:" FontSize="22"/>
                 <TextBox x:Name="txtUsername" Width="150" FontSize="22"/>
@@ -27,7 +33,18 @@
                 <TextBox x:Name="txtAge" Width="150" FontSize="22"/>
             </StackPanel>
 
-            <Button x:Name="btnLogin" Content="LOGIN" FontSize="22" Margin="5" Click="btnLogin_Click" IsDefault="True"/>
+            <Button x:Name="btnLogin" Content="LOGIN / UPDATE" FontSize="22" Margin="5" Click="btnLogin_Click" IsDefault="True"/>
         </StackPanel>
+
+        <Border x:Name="ErrorOutput"
+                Visibility="Collapsed"
+                Grid.Row="3" Background="Crimson"
+                Margin="5" BorderThickness="3"
+                BorderBrush="Black">
+            <TextBlock x:Name="tbkErrorOutput" Text="ERROR" 
+                    HorizontalAlignment="Center"
+                   FontSize="22"/>
+        </Border>
+        
     </Grid>
 </Window>

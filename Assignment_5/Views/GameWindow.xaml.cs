@@ -129,6 +129,7 @@ namespace Assignment_5.Views
             {
                 int bob = int.Parse(txtUserAnswer.Text);
                 bool isCorrect = currentGame.ValidateUserAnswer(bob);
+
                 if (isCorrect)
                 {
                     tbkResult.Text = "SUCCESS!";
@@ -145,6 +146,7 @@ namespace Assignment_5.Views
                 btnSubmit.IsEnabled = false;
                 btnNext.IsEnabled = true;
                 btnNext.IsDefault = true;
+                ErrorOutput.Visibility = Visibility.Collapsed;
 
                 // Play audio that was loaded
                 soundPlayer.Play();
@@ -155,7 +157,8 @@ namespace Assignment_5.Views
             catch (FormatException fex)
             {
                 // User entered invalid input notify the user
-                MessageBox.Show("Please enter a valid numeric value into the answer field.", "Invalid User Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorOutput.Visibility = Visibility.Visible;
+                tbkErrorOutput.Text = "Please enter a valid numeric value into the answer field.";
             }
             catch (ResourceReferenceKeyNotFoundException resourceEx)
             {

@@ -8,9 +8,9 @@ using System.IO;
 
 namespace Assignment_5.Controllers
 {
-    class CSVUserRepository : IRepository<User>
+    class CSVUserRepository : IRepository<string, User>
     {
-        private string path;
+        private readonly string path;
 
         public CSVUserRepository()
         {
@@ -30,17 +30,18 @@ namespace Assignment_5.Controllers
             }
         }
 
-        public void Delete(int index)
+        public void Delete(string key)
         {
-            List<User> users = GetValues().ToList();
-            users.RemoveAt(index);
+            var query = from users in GetValues()
+                        where users.Username != key
+                        select users;
 
             // Update the list of users
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate | FileMode.Truncate, FileAccess.Write))
             {
                 using (var sw = new StreamWriter(fs))
                 {
-                    foreach (User usr in users)
+                    foreach (User usr in query)
                     {
                         var output = $"{usr.Username.ToUpper()},{usr.Age}";
                         sw.WriteLine(output);
@@ -49,7 +50,7 @@ namespace Assignment_5.Controllers
             }
         }
 
-        public User GetValue(int index)
+        public User GetValue(string key)
         {
             throw new NotImplementedException();
         }
@@ -70,9 +71,9 @@ namespace Assignment_5.Controllers
             return users;
         }
 
-        public void UpdateValue(int index, User updatedValue)
+        public void UpdateValue(string key, User updatedValue)
         {
-            Delete(index);
+            Delete(key);
             Add(updatedValue);
         }
     }

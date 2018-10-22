@@ -6,7 +6,7 @@ using Assignment_5.Models;
 
 namespace Assignment_5.Controllers
 {
-    public class CSVScoreRepository : IRepository<Score>
+    public class CSVScoreRepository : IRepository<int, Score>
     {
         private string path;
 

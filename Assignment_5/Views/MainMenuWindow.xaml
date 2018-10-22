@@ -70,15 +70,22 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="tbkGameTitle" Margin="10" TextWrapping="Wrap" Text="MATH BATTLE" FontWeight="Bold" FontSize="29.333" TextAlignment="Center"/>
-        <StackPanel Grid.Row="1" Height="Auto" Margin="0" Width="231.204" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock x:Name="tbkGameTitle" Margin="0,1" TextWrapping="Wrap" 
+                   Text="MATH BATTLE" FontWeight="Bold" FontSize="25" 
+                   TextAlignment="Center" Grid.Row="0"/>
+        <TextBlock x:Name="tbkMenuTitle" Margin="0,1" TextWrapping="Wrap" 
+                   Text="MAIN MENU" FontWeight="Bold" FontSize="22" 
+                   TextAlignment="Center" Grid.Row="1"/>
+        <StackPanel Grid.Row="2" Height="Auto" Width="232" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="btnAdditionGame" Content="ADDITION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnAdditionGame_Click"/>
             <Button x:Name="btnSubtractionGame" Content="SUBTRACTION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnSubtractionGame_Click"/>
             <Button x:Name="btnMultiplicationGame" Content="MULTIPLICATION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnMultiplicationGame_Click"/>
             <Button x:Name="btnDivisionGame" Content="DIVISION" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnDivisionGame_Click"/>
             <Button x:Name="btnScore" Content="HIGH SCORES" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnScore_Click"/>
+            <Button x:Name="btnLoginScreen" Content="SWITCH USERS" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnLoginScreen_Click"/>
             <Button x:Name="btnExit" Content="EXIT" Style="{DynamicResource ButtonStyle_MainMenu}" Click="btnExit_Click"/>
         </StackPanel>
     </Grid>

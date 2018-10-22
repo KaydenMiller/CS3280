@@ -47,8 +47,16 @@ namespace Assignment_5.Views
                     Console.WriteLine("The user could not be logged into the application!");
                 }
             }
+            catch (ArgumentException argEx)
+            {
+                // Tell the user they entered invalid data
+                ErrorOutput.Visibility = Visibility.Visible;
+                tbkErrorOutput.Text = "ERROR: Invalid user data, please use only numeric values for your age.";
+            }
             catch (Exception ex)
             {
+                ErrorOutput.Visibility = Visibility.Visible;
+                tbkErrorOutput.Text = "ERROR: Unknown System Error. Please see error log.";
                 ex.Log();
             }
         }

@@ -11,7 +11,7 @@ namespace Assignment_5.Controllers
     public static class UserManager
     {
         private static User currentUser = null;
-        private readonly static IRepository<User> userRepo = new CSVUserRepository();
+        private readonly static IRepository<string, User> userRepo = new CSVUserRepository();
 
         public static OperationResult LoginUser(string username, int age)
         {
@@ -22,6 +22,11 @@ namespace Assignment_5.Controllers
             {
                 List<User> users = GetUserFromRepo(username).ToList();
                 currentUser = users[0];
+                if (currentUser.Age != age)
+                {
+                    // Update the user file
+                    UpdateUser(new User() { Username = username, Age = age });
+                }
             }
             else
             {
@@ -37,6 +42,11 @@ namespace Assignment_5.Controllers
             }
 
             return operationResult;
+        }
+
+        private static void UpdateUser(User user)
+        {
+            userRepo.UpdateValue(user.Username, user);
         }
 
         private static void AddUserToRepo(User user)

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Assignment_5.Controllers;
 using Assignment_5.Models;
+using Assignment_5.Extensions;
 
 namespace Assignment_5.Views
 {
@@ -27,25 +28,47 @@ namespace Assignment_5.Views
         public HighScoreWindow(MainMenuWindow mainMenu)
         {
             InitializeComponent();
-            Top10Scores = ScoreManager.GetTop10Scores();
-            this.mainMenu = mainMenu;
+
+            try
+            {
+                Top10Scores = ScoreManager.GetTop10Scores();
+                this.mainMenu = mainMenu;
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Score[] scores = Top10Scores.ToArray();
-            lbxHighScores.ItemsSource = scores.Select((x, i) => new
+            try
             {
-                Index = i + 1,
-                x.Username,
-                x.Value
-            });
+                Score[] scores = Top10Scores.ToArray();
+                lbxHighScores.ItemsSource = scores.Select((x, i) => new
+                {
+                    Index = i + 1,
+                    x.Username,
+                    x.Value
+                });
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)
         {
-            mainMenu.Show();
-            this.Close();
+            try
+            {
+                mainMenu.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
     }
 }

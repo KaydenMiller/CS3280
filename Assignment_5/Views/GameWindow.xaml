@@ -30,12 +30,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFFFCECE" Grid.Row="2" Stroke="Black"/>
 
         <TextBlock x:Name="tbkGameTitle" Margin="10,1" TextWrapping="Wrap" Text="MATH BATTLE" FontSize="29.333" FontWeight="Bold" TextAlignment="Center" Style="{DynamicResource TextBlockStyle_Title}" HorizontalAlignment="Stretch"/>
+        <TextBlock x:Name="tbkGameMode" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="GAME MODE" FontSize="21.333" FontWeight="Bold" TextAlignment="Center"/>
+        
         <Grid Margin="10" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -60,12 +63,21 @@
                 <TextBlock x:Name="tbkRoundInfo" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="Round #/10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
             </Grid>
         </Grid>
-        <TextBlock x:Name="tbkGameMode" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="GAME MODE" FontSize="21.333" FontWeight="Bold" TextAlignment="Center"/>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="279,0">
             <Button x:Name="btnExit" Content="Exit" FontSize="16" Padding="10" Margin="10,5" Click="btnExit_Click"/>
             <Button x:Name="btnSubmit" Content="Submit" FontSize="16" Padding="10" Margin="10,5" Click="btnSubmit_Click" IsDefault="True"/>
             <Button x:Name="btnNext" Content="Next" FontSize="16" Padding="10" Margin="10,5" Click="btnNext_Click" IsEnabled="False"/>
         </StackPanel>
 
+        <Border x:Name="ErrorOutput"
+                Visibility="Collapsed"
+                Grid.Row="4" Background="Crimson"
+                Margin="5" BorderThickness="3"
+                BorderBrush="Black">
+            <TextBlock x:Name="tbkErrorOutput" Text="ERROR" 
+                    HorizontalAlignment="Center"
+                   FontSize="22"/>
+        </Border>
     </Grid>
 </Window>
