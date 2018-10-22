@@ -13,12 +13,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="tbkGameTitle" Style="{DynamicResource TextBlockStyle_Title}" FontSize="29.333" Margin="10,1" HorizontalAlignment="Stretch" TextAlignment="Center"/>
         <TextBlock x:Name="tbkWindowTitle" Margin="10,1" Grid.Row="1" TextWrapping="Wrap" Text="High Scores" FontSize="29.333" FontWeight="Bold" TextAlignment="Center"/>
-        <ListBox x:Name="lbxHighScores" Grid.Row="2" HorizontalAlignment="Center" 
+
+        <TextBlock x:Name="tbkUserScore" Grid.Row="2"
+                   Text="{Binding Path=Value, StringFormat={}Your Score: {0}}"
+                   HorizontalAlignment="Center"
+                   FontStyle="Italic"
+                   FontWeight="Bold"
+                   Foreground="Green"
+                   FontSize="22"/>
+
+        <ListBox x:Name="lbxHighScores" Grid.Row="3" HorizontalAlignment="Center" 
                  Margin="5" BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -42,7 +52,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="btnMainMenu" Content="HOME" FontSize="22" FontWeight="Bold"
-                Grid.Row="3" HorizontalAlignment="Center" Margin="5" Padding="10 2"
-                Click="btnMainMenu_Click"/>
+                Grid.Row="4" HorizontalAlignment="Center" Margin="5" Padding="10 2"
+                Click="btnMainMenu_Click" IsDefault="True"/>
     </Grid>
 </Window>

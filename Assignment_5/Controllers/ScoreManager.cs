@@ -29,5 +29,17 @@ namespace Assignment_5.Controllers
         {
             scoreRepo.Add(score);
         }
+
+        public static Score GetLastScore()
+        {
+            var query =
+                from score in scoreRepo.GetValues()
+                select score;
+
+            var scores = query.ToList();
+            scores.Reverse();
+
+            return scores.ElementAt(0);
+        }
     }
 }

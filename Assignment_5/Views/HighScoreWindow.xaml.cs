@@ -25,13 +25,17 @@ namespace Assignment_5.Views
         IEnumerable<Score> Top10Scores = Enumerable.Empty<Score>();
         MainMenuWindow mainMenu = null;
 
+        public int Value { get; set; } = 1000;
+
         public HighScoreWindow(MainMenuWindow mainMenu)
         {
             InitializeComponent();
+            DataContext = this;
 
             try
             {
                 Top10Scores = ScoreManager.GetTop10Scores();
+                Value = ScoreManager.GetLastScore().Value;
                 this.mainMenu = mainMenu;
             }
             catch (Exception ex)
