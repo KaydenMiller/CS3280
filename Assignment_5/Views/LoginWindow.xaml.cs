@@ -37,7 +37,7 @@ namespace Assignment_5.Views
                 if (Controllers.UserManager.LoginUser(username, age).Status == Utilities.OperationStatus.Success)
                 {
                     Console.WriteLine("The user was logged into the application!");
-                    MainMenuWindow mainMenu = new MainMenuWindow();
+                    MainMenuWindow mainMenu = new MainMenuWindow(this);
                     mainMenu.Show();
                     this.Hide();
                 }
