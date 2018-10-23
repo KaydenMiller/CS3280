@@ -33,18 +33,26 @@ namespace Assignment_5.Views
             try
             {
                 if (!int.TryParse(txtAge.Text, out age)) throw new ArgumentException();
-
-                if (Controllers.UserManager.LoginUser(username, age).Status == Utilities.OperationStatus.Success)
+                if (age > 0)
                 {
-                    Console.WriteLine("The user was logged into the application!");
-                    MainMenuWindow mainMenu = new MainMenuWindow(this);
-                    mainMenu.Show();
-                    this.Hide();
+                    if (Controllers.UserManager.LoginUser(username, age).Status == Utilities.OperationStatus.Success)
+                    {
+                        Console.WriteLine("The user was logged into the application!");
+                        MainMenuWindow mainMenu = new MainMenuWindow(this);
+                        mainMenu.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        // Alert the user that they could not be loged in
+                        Console.WriteLine("The user could not be logged into the application!");
+                    }
                 }
                 else
                 {
-                    // Alert the user that they could not be loged in
-                    Console.WriteLine("The user could not be logged into the application!");
+                    Console.WriteLine("The user entered an invalid age <= 0.");
+                    ErrorOutput.Visibility = Visibility.Visible;
+                    tbkErrorOutput.Text = "ERROR: Invalid user data, please enter a value above 0.";
                 }
             }
             catch (ArgumentException argEx)

@@ -51,6 +51,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            
             <StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
                 <TextBlock x:Name="tbkFirstOperand" TextWrapping="Wrap" Padding="10,0" FontSize="16"><Run Text="FIRST OPERAND"/></TextBlock>
                 <TextBlock x:Name="tbkOperation" TextWrapping="Wrap" TextAlignment="Center" Text="*" Padding="10,0" FontSize="16"/>

@@ -32,10 +32,10 @@ namespace Assignment_5.Views
 
         BitmapImage[] images =
         {
-            new BitmapImage(new Uri(@"Resources/Images/StarWarsAddition.jpg", UriKind.Relative)),
-            new BitmapImage(new Uri(@"Resources/Images/StarWarsSubtract.jpg", UriKind.Relative)),
-            new BitmapImage(new Uri(@"Resources/Images/StarWarsMultiply.jpg", UriKind.Relative)),
-            new BitmapImage(new Uri(@"Resources/Images/StarWarsDivide.jpg", UriKind.Relative))
+            new BitmapImage(new Uri(@"../Resources/Images/StarWarsAddition.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"../Resources/Images/StarWarsSubtract.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"../Resources/Images/StarWarsMultiply.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri(@"../Resources/Images/StarWarsDivide.jpg", UriKind.Relative))
         };
         public BitmapImage CurrentImage { get; set; }
         
@@ -72,15 +72,19 @@ namespace Assignment_5.Views
             {
                 case GameType.Addition:
                     CurrentImage = images[0];
+                    Background = new ImageBrush(images[0]);
                     break;
                 case GameType.Subtraction:
                     CurrentImage = images[1];
+                    Background = new ImageBrush(images[1]);
                     break;
                 case GameType.Multiplication:
                     CurrentImage = images[2];
+                    Background = new ImageBrush(images[2]);
                     break;
                 case GameType.Division:
                     CurrentImage = images[3];
+                    Background = new ImageBrush(images[3]);
                     break;
             }
         }

@@ -34,11 +34,11 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <TextBlock Text="Username:" FontSize="22"/>
-                <TextBox x:Name="txtUsername" Width="150" FontSize="22"/>
+                <TextBox x:Name="txtUsername" Width="150" FontSize="22" MaxLength="13"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <TextBlock Text="Age:" FontSize="22"/>
-                <TextBox x:Name="txtAge" Width="150" FontSize="22"/>
+                <TextBox x:Name="txtAge" Width="150" FontSize="22" MaxLength="3"/>
             </StackPanel>
 
             <Button x:Name="btnLogin" Content="LOGIN / UPDATE" FontSize="22" Margin="5" Click="btnLogin_Click" IsDefault="True"/>
