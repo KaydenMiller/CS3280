@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Assignment_5.Controllers;
 using Assignment_5.Models;
 using Assignment_5.Extensions;
+using System.Media;
 
 namespace Assignment_5.Views
 {
@@ -24,9 +25,17 @@ namespace Assignment_5.Views
     {
         IEnumerable<Score> Top10Scores = Enumerable.Empty<Score>();
         MainMenuWindow mainMenu = null;
+        SoundPlayer soundPlayer = new SoundPlayer();
 
+        /// <summary>
+        /// The value of the score for use with DataBinding
+        /// </summary>
         public int Value { get; set; } = 1000;
 
+        /// <summary>
+        /// The highscore windows ctor
+        /// </summary>
+        /// <param name="mainMenu"></param>
         public HighScoreWindow(MainMenuWindow mainMenu)
         {
             InitializeComponent();
@@ -37,6 +46,7 @@ namespace Assignment_5.Views
                 Top10Scores = ScoreManager.GetTop10Scores();
                 Value = ScoreManager.GetLastScore().Value;
                 this.mainMenu = mainMenu;
+                soundPlayer.SoundLocation = "Resources/Audio/StarWarsThemeEnd.wav";
             }
             catch (Exception ex)
             {
@@ -44,6 +54,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// When the window is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -55,6 +70,7 @@ namespace Assignment_5.Views
                     x.Username,
                     x.Value
                 });
+                soundPlayer.Play();
             }
             catch (Exception ex)
             {
@@ -62,12 +78,34 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// When the main menu button is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMainMenu_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 mainMenu.Show();
                 this.Close();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
+        }
+
+        /// <summary>
+        /// When the window is closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                soundPlayer.Stop();
             }
             catch (Exception ex)
             {

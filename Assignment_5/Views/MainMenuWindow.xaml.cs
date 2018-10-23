@@ -12,6 +12,10 @@ namespace Assignment_5.Views
     {
         LoginWindow loginWindow;
 
+        /// <summary>
+        /// Main menu ctor
+        /// </summary>
+        /// <param name="loginWindow"></param>
         public MainMenuWindow(LoginWindow loginWindow)
         {
             this.loginWindow = loginWindow;
@@ -19,6 +23,11 @@ namespace Assignment_5.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Will load the addition game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdditionGame_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -31,6 +40,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Will load the subtraction game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubtractionGame_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -43,6 +57,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Will load the multiplication game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMultiplicationGame_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -55,6 +74,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Will load the division game ;)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDivisionGame_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -67,6 +91,10 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Will load the game window with with the game type.
+        /// </summary>
+        /// <param name="gameType"></param>
         private void LoadGameWindow(GameType gameType)
         {
             try
@@ -81,6 +109,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Open the high score menu 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnScore_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -95,6 +128,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Exit the program correctly and close all tasks
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -107,6 +145,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Go back to the login screen to allow the user to edit or change users
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLoginScreen_Click(object sender, RoutedEventArgs e)
         {
             try

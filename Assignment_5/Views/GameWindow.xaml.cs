@@ -37,11 +37,19 @@ namespace Assignment_5.Views
             new BitmapImage(new Uri(@"../Resources/Images/StarWarsMultiply.jpg", UriKind.Relative)),
             new BitmapImage(new Uri(@"../Resources/Images/StarWarsDivide.jpg", UriKind.Relative))
         };
+        /// <summary>
+        /// The current image prop for use with data binding (not sure if this even worked)
+        /// </summary>
         public BitmapImage CurrentImage { get; set; }
         
 
         const int TIMER_REFRESH_RATE_MILLI = 500;
 
+        /// <summary>
+        /// Game window ctor
+        /// </summary>
+        /// <param name="mainMenu"></param>
+        /// <param name="gameType"></param>
         public GameWindow(MainMenuWindow mainMenu, GameType gameType)
         {
             InitializeComponent();
@@ -66,6 +74,10 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Determines the image that needs to be displayed for each of the different game modes.
+        /// </summary>
+        /// <param name="gt"></param>
         private void SetImage(GameType gt)
         {
             switch (gt)
@@ -89,6 +101,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// When the windows loads
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -104,6 +121,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// When the window exits
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -119,6 +141,9 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Update the display
+        /// </summary>
         private void UpdateDisplay()
         {
             try
@@ -136,6 +161,9 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Update the time
+        /// </summary>
         private void UpdateTime()
         {
             try
@@ -149,6 +177,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Update the Ui when the time elapses. Attatched to Timer elapsed event.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         private void UpdateUiElapsed(object source, ElapsedEventArgs e)
         {
             try
@@ -161,6 +194,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// When the user submits their answer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -209,6 +247,11 @@ namespace Assignment_5.Views
             }
         }
 
+        /// <summary>
+        /// Move to the next question
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             try

@@ -18,9 +18,9 @@
                Stretch="Fill" Grid.Row="0" Grid.RowSpan="4"
                Source="..\Resources\Images\StarWarsMain.jpeg"/>
 
-        <TextBlock x:Name="tbxGameTitle" Text="MATH BATTLE" Grid.Row="0" Style="{DynamicResource TextBlockStyle_Title}" FontSize="30" Margin="0,1"/>
+        <TextBlock x:Name="tbxGameTitle" Foreground="White" Text="MATH BATTLE" Grid.Row="0" Style="{DynamicResource TextBlockStyle_Title}" FontSize="30" Margin="0,1"/>
 
-        <TextBlock x:Name="tbxWindowTitle" Text="LOGIN" Grid.Row="1" Style="{DynamicResource TextBlockStyle_Title}" FontSize="25" Margin="0,1"/>
+        <TextBlock x:Name="tbxWindowTitle" Foreground="White" Text="LOGIN" Grid.Row="1" Style="{DynamicResource TextBlockStyle_Title}" FontSize="25" Margin="0,1"/>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.Background>
@@ -42,6 +42,7 @@
             </StackPanel>
 
             <Button x:Name="btnLogin" Content="LOGIN / UPDATE" FontSize="22" Margin="5" Click="btnLogin_Click" IsDefault="True"/>
+            <TextBlock Text="Copyrights of all images and audio belong to their respective owners." Margin="5"/>
         </StackPanel>
 
         <Border x:Name="ErrorOutput"

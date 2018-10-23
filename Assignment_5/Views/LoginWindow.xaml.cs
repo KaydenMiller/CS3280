@@ -20,11 +20,20 @@ namespace Assignment_5.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
+
+        /// <summary>
+        /// Login Window ctor
+        /// </summary>
         public LoginWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Will attempt to log the user in on button press
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUsername.Text;

@@ -7,6 +7,9 @@ using System.IO;
 
 namespace Assignment_5.Extensions
 {
+    /// <summary>
+    /// Extention methods for use with exception handleing
+    /// </summary>
     public static class ExceptionExtensions
     {
         /// <summary>
